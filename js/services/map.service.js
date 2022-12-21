@@ -5,7 +5,6 @@ export const mapService = {
   getGclickedPos,
   centerMap,
   searchAddress,
-  searchInput,
 }
 
 // Var that is used throughout this Module (not global)

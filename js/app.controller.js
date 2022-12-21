@@ -11,7 +11,6 @@ window.onAddPlace = onAddPlace
 window.onRemovePlace = onRemovePlace
 window.onGoToPlace = onGoToPlace
 window.onSearch = onSearch
-window.onSearchInput = onSearchInput
 
 function onInit() {
   mapService
