@@ -3,6 +3,7 @@ export const mapService = {
   addMarker,
   panTo,
   getGclickedPos,
+  centerMap,
 }
 
 // Var that is used throughout this Module (not global)
@@ -40,6 +41,29 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 function getGclickedPos() {
   return gClickedPos
+}
+
+function centerMap(lat, lng) {
+  const elMap = document.querySelector('#map')
+  // options
+  let options = {
+    zoom: 15,
+    center: {
+      lat,
+      lng,
+    },
+  }
+  // The map
+  gMap = new google.maps.Map(elMap, options)
+  // The marker
+  const marker = new google.maps.Marker({
+    position: {
+      lat,
+      lng,
+    },
+    map: gMap,
+  })
+  // map.addListener("dblclick", onAddPlace)
 }
 
 function addMarker(loc) {

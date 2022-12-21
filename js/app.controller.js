@@ -9,6 +9,7 @@ window.onGetPlaces = onGetPlaces
 window.onGetUserPos = onGetUserPos
 window.onAddPlace = onAddPlace
 window.onRemovePlace = onRemovePlace
+window.onGoToPlace = onGoToPlace
 
 function onInit() {
   mapService
@@ -39,7 +40,7 @@ function onGetPlaces() {
       <tr>
         <td>Place: ${place.name}</td>
         <td>Date created: ${place.time}</td>
-        <td><button onclick="onGoToPlace(${place.id})" class="go-btn">Go</button></td>
+        <td><button onclick="onGoToPlace(${place.lat}, ${place.lng})" class="go-btn">Go</button></td>
         <td><button onclick="onRemovePlace('${place.id}')" class="remove-btn">Remove</button></td>
       </tr>
     `
@@ -82,6 +83,7 @@ function onRemovePlace(placeId) {
   onGetPlaces()
 }
 
-function onGoToPlace(placeId) {
-  console.log('hi')
+function onGoToPlace(lat, lng) {
+  console.log(lat, lng)
+  mapService.centerMap(lat, lng)
 }
