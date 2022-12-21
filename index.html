@@ -6,46 +6,79 @@
 
     <title>TravelTip</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/x-icon" href="img/travel-icon.png">
   </head>
 
   <body>
+
     <h1>TravelTip</h1>
 
-    <div id="map" style="width: 100%; height: 400px"></div>
+    <div class="controler-container">
 
-    <button onclick="onAddPlace()" class="btn-add-place">Add Place</button>
+      <div class="btns-container">
 
-    <button onclick="onAddMarker()" class="btn-add-marker">
-      Add Marker Speific Location
-    </button>
+        <button onclick="onAddPlace()" class="btn-add-place">
+          Add Place
+        </button>
 
-    <button onclick="onGetUserPos()" class="btn-user-pos">
-      Get User Position
-    </button>
+        <button onclick="onAddMarker()" class="btn-add-marker">
+          Add Marker To Speific Location
+        </button>
 
-    <button onclick="onGetPlaces()" class="btn-get-places">Get Places</button>
+        <button onclick="onPanTo()" class="btn-pan">
+          Pan Map To Tokyo
+        </button>
 
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+      </div>
 
-    <form onsubmit="onSearch(event)">
-      <input
-        class="search"
-        type="text"
-        name="search"
-        placeholder="Search address"
-        value="Tel Aviv"
-      />
-      <button class="btn search-btn">Go</button>
-    </form>
+      <div class="search-container">
 
-    <div>You are at: <span class="user-pos"></span></div>
+        <form onsubmit="onSearch(event)">
+          <input
+            class="search"
+            type="text"
+            name="search"
+            placeholder="Search address"
+            value="Tel Aviv"
+          />
+          <button class="btn-search">Go</button>
+        </form>
 
-    <div class="places-table">
-      Locations:
-      <table>
-        <tbody class="places"></tbody>
-      </table>
+      </div>
+
+  </div>
+
+      <div id="map" style="width: 100%; height: 400px"></div>
+
+    <div class="user-container">
+
+      <button onclick="onGetUserPos()" class="btn-user-pos">
+        Get My Position
+      </button>
+
+      <div class="user-pos-container hide">You are at: <span class="user-pos"></span></div>
+
+      <button onclick="onGetPlaces()" class="btn-get-places">
+        Get Places
+      </button>
+
+      <div class="places-table hide">
+        Locations
+        <table>
+          <thead>
+            <tr>
+              <td>Place</td>
+              <td>Date Created</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody class="places"></tbody>
+        </table>
     </div>
+  </div>
+
+
     <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
   </body>

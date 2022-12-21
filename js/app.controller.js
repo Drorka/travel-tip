@@ -1,6 +1,6 @@
 import { mapService } from './services/map.service.js'
 import { placeService } from './services/place.service.js'
-import { utils } from './services/utils.js'
+
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
@@ -11,6 +11,7 @@ window.onAddPlace = onAddPlace
 window.onRemovePlace = onRemovePlace
 window.onGoToPlace = onGoToPlace
 window.onSearch = onSearch
+
 
 function onInit() {
   mapService
@@ -29,18 +30,20 @@ function getPosition() {
   })
 }
 
+
 function onAddMarker() {
   console.log('Adding a marker')
   mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
 }
+
 
 function onGetPlaces() {
   placeService.getPlaces().then((places) => {
     const strHTML = places.map(
       (place) => `
       <tr>
-        <td>Place: ${place.name}</td>
-        <td>Date created: ${place.time}</td>
+        <td>${place.name}</td>
+        <td>${place.time}</td>
         <td><button onclick="onGoToPlace(${place.lat}, ${place.lng})" class="go-btn">Go</button></td>
         <td><button onclick="onRemovePlace('${place.id}')" class="remove-btn">Remove</button></td>
       </tr>
@@ -48,9 +51,11 @@ function onGetPlaces() {
     )
 
     console.log('places:', places)
+    document.querySelector('.places-table').classList.remove('hide')
     document.querySelector('.places').innerHTML = strHTML.join('')
   })
 }
+
 
 function onGetUserPos() {
   getPosition()
@@ -61,6 +66,7 @@ function onGetUserPos() {
     })
     .then((pos) => {
       console.log('User position is:', pos.coords)
+      document.querySelector('.user-pos-container').classList.remove('hide')
       document.querySelector(
         '.user-pos'
       ).innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`

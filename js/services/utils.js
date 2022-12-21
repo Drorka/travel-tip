@@ -3,6 +3,7 @@ export const utils = {
   getHumanDate,
 }
 
+
 function makeId(length = 3) {
   const possible = 'abcdefghijklmnopqrstuvwxyz0123456789'
   var txt = ''
@@ -13,7 +14,6 @@ function makeId(length = 3) {
 
   return txt
 }
-
 
 
 function getHumanDate(timestamp) {
