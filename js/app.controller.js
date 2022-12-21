@@ -1,10 +1,11 @@
 import { mapService } from './services/map.service.js'
 import { placeService } from './services/place.service.js'
+import { utils } from './services/utils.js'
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
-window.onGetLocs = onGetLocs
+window.onGetPlaces = onGetPlaces
 window.onGetUserPos = onGetUserPos
 window.onAddPlace = onAddPlace
 
@@ -30,14 +31,19 @@ function onAddMarker() {
   mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
 }
 
-function onGetLocs() {
+function onGetPlaces() {
   placeService.getPlaces().then((places) => {
+    const strHTML = places.map(place => {`
+      <tr>
+        <td>Place: ${place.name}</td>
+        <td>Date created: ${place.time}</td>
+        <td><button class="go-btn">Go</button></td>
+        <td><button class="delete-btn">Delete</button></td>
+      </tr>
+    `})
+    
     console.log('places:', places)
-    document.querySelector('.places').innerText = JSON.stringify(
-      places,
-      null,
-      2
-    )
+    document.querySelector('.places').innerHTML = strHTML.join('')
   })
 }
 

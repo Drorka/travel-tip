@@ -21,16 +21,22 @@
 
     <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
 
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+    <button onclick="onGetPlaces()" class="btn-get-places">Get Places</button>
 
     <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
 
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: 
-        <div class="places"></div>
-    </p>
+    <div>You are at: <span class="user-pos"></span></div>
 
-    <script src="lib/axios.js"></script>
+    <div class="places-table">Locations: 
+        <table>
+            <tbody class="places">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="lib/axios.js">
+    </script>
     
     <script type="module" src="js/app.controller.js"></script>
 

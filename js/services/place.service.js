@@ -36,7 +36,7 @@ function _createPlace({ lat, lng }) {
     lat,
     lng,
     name: 'New place',
-    time: new Date(),
+    time: utils.getHumanDate(new Date()),
     updatedAt: null,
   }
 }

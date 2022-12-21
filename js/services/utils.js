@@ -1,6 +1,6 @@
 export const utils = {
   makeId,
-  formatTimeStamp,
+  getHumanDate,
 }
 
 function makeId(length = 3) {
@@ -14,23 +14,13 @@ function makeId(length = 3) {
   return txt
 }
 
-function formatTimeStamp(timeStamp) {
-  var timeStampFormat =
-    timeStamp.getHours() +
-    ':' +
-    timeStamp.getMinutes() +
-    ':' +
-    timeStamp.getSeconds() +
-    ' ' +
-    timeStamp.getDate() +
-    '.' +
-    (timeStamp.getMonth() + 1) +
-    '.' +
-    timeStamp.getFullYear()
 
-  return timeStampFormat
+
+function getHumanDate(timestamp) {
+  const date = new Date(timestamp)
+  var humanDate = date.toDateString()
+  return humanDate
 }
-
 // function randomPastTime() {
 //   const HOUR = 1000 * 60 * 60
 //   const DAY = 1000 * 60 * 60 * 24
