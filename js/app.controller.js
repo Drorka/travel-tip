@@ -54,6 +54,11 @@ function onGetPlaces() {
 function onGetUserPos() {
   getPosition()
     .then((pos) => {
+      console.log(pos)
+      onGoToPlace(pos.coords.latitude, pos.coords.longitude)
+      return pos
+    })
+    .then((pos) => {
       console.log('User position is:', pos.coords)
       document.querySelector(
         '.user-pos'
@@ -75,6 +80,7 @@ function onAddPlace() {
   console.log('adding place')
   console.log(clickedPos.lat(), clickedPos.lng())
   placeService.addPlace(clickedPos.lat(), clickedPos.lng())
+  onGetPlaces()
 }
 
 function onRemovePlace(placeId) {
