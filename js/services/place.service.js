@@ -4,6 +4,7 @@ import { utils } from './utils.js'
 export const placeService = {
   addPlace,
   getPlaces,
+  removePlace,
 }
 
 const STORAGE_KEY_PLACE_DB = 'placeDB'
@@ -41,17 +42,17 @@ function _createPlace({ lat, lng }) {
   }
 }
 
-// * place keeper functions
-
 function removePlace(placeId) {
   const placeIdx = gSavedPlaces.findIndex((place) => place.id === placeId)
   gSavedPlaces.splice(placeIdx, 1)
   if (gSavedPlaces.length === 0) {
-    saveToStorage(STORAGE_KEY_PLACE_DB, null)
+    storageService.saveToStorage(STORAGE_KEY_PLACE_DB, null)
     return
   }
-  saveToStorage(STORAGE_KEY_PLACE_DB, gSavedPlaces)
+  storageService.saveToStorage(STORAGE_KEY_PLACE_DB, gSavedPlaces)
 }
+
+// * place keeper functions
 
 function _createPlaces() {
   return [

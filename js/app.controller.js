@@ -8,6 +8,7 @@ window.onPanTo = onPanTo
 window.onGetPlaces = onGetPlaces
 window.onGetUserPos = onGetUserPos
 window.onAddPlace = onAddPlace
+window.onRemovePlace = onRemovePlace
 
 function onInit() {
   mapService
@@ -33,15 +34,17 @@ function onAddMarker() {
 
 function onGetPlaces() {
   placeService.getPlaces().then((places) => {
-    const strHTML = places.map(place => {`
+    const strHTML = places.map(
+      (place) => `
       <tr>
         <td>Place: ${place.name}</td>
         <td>Date created: ${place.time}</td>
-        <td><button class="go-btn">Go</button></td>
-        <td><button class="delete-btn">Delete</button></td>
+        <td><button onclick="onGoToPlace(${place.id})" class="go-btn">Go</button></td>
+        <td><button onclick="onRemovePlace('${place.id}')" class="remove-btn">Remove</button></td>
       </tr>
-    `})
-    
+    `
+    )
+
     console.log('places:', places)
     document.querySelector('.places').innerHTML = strHTML.join('')
   })
@@ -65,9 +68,20 @@ function onPanTo() {
   mapService.panTo(35.6895, 139.6917)
 }
 
+// * our new funcs
 function onAddPlace() {
   const clickedPos = mapService.getGclickedPos()
   console.log('adding place')
   console.log(clickedPos.lat(), clickedPos.lng())
   placeService.addPlace(clickedPos.lat(), clickedPos.lng())
+}
+
+function onRemovePlace(placeId) {
+  console.log(placeId)
+  placeService.removePlace(placeId)
+  onGetPlaces()
+}
+
+function onGoToPlace(placeId) {
+  console.log('hi')
 }
