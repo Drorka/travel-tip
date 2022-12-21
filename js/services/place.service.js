@@ -1,8 +1,12 @@
+import { storageService } from './storage.service.js'
+import { utils } from './utils.js'
+
 export const placeService = {}
 
 const STORAGE_KEY_PLACE_DB = 'placeDB'
 const gSavedPlaces = loadFromStorage(STORAGE_KEY_PLACE_DB) || _createPlaces()
 
+// * place keeper functions
 function getPlaces() {
   return loadFromStorage(STORAGE_KEY_PLACE_DB)
 }
