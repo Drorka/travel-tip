@@ -1,4 +1,3 @@
-import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 import { placeService } from './services/place.service.js'
 
@@ -32,9 +31,13 @@ function onAddMarker() {
 }
 
 function onGetLocs() {
-  locService.getLocs().then((locs) => {
-    console.log('Locations:', locs)
-    document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
+  placeService.getPlaces().then((places) => {
+    console.log('places:', places)
+    document.querySelector('.places').innerText = JSON.stringify(
+      places,
+      null,
+      2
+    )
   })
 }
 

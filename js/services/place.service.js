@@ -3,7 +3,12 @@ import { utils } from './utils.js'
 
 export const placeService = {
   addPlace,
+  getPlaces,
 }
+
+const STORAGE_KEY_PLACE_DB = 'placeDB'
+const gSavedPlaces =
+  storageService.loadFromStorage(STORAGE_KEY_PLACE_DB) || _createPlaces()
 
 // * from loc.service
 const locs = [
@@ -11,17 +16,9 @@ const locs = [
   { name: 'Neveragain', lat: 32.047201, lng: 34.832581 },
 ]
 
-function getLocs() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(locs)
-    }, 2000)
-  })
+function getPlaces() {
+  return Promise.resolve(gSavedPlaces)
 }
-
-const STORAGE_KEY_PLACE_DB = 'placeDB'
-const gSavedPlaces =
-  storageService.loadFromStorage(STORAGE_KEY_PLACE_DB) || _createPlaces()
 
 function addPlace({ lat, lng }) {
   gSavedPlaces.unshift(
@@ -45,9 +42,6 @@ function _createPlace({ lat, lng }) {
 }
 
 // * place keeper functions
-function getPlaces() {
-  return loadFromStorage(STORAGE_KEY_PLACE_DB)
-}
 
 function removePlace(placeId) {
   const placeIdx = gSavedPlaces.findIndex((place) => place.id === placeId)
