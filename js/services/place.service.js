@@ -20,7 +20,7 @@ function getPlaces() {
   return Promise.resolve(gSavedPlaces)
 }
 
-function addPlace({ lat, lng }) {
+function addPlace(lat, lng) {
   gSavedPlaces.unshift(
     _createPlace({
       lat,

@@ -62,5 +62,6 @@ function onPanTo() {
 function onAddPlace() {
   const clickedPos = mapService.getGclickedPos()
   console.log('adding place')
-  placeService.addPlace(clickedPos)
+  console.log(clickedPos.lat(), clickedPos.lng())
+  placeService.addPlace(clickedPos.lat(), clickedPos.lng())
 }

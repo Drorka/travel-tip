@@ -23,7 +23,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     .then(() => {
       gMap.addListener('click', (mapsMouseEvent) => {
         console.log(mapsMouseEvent.latLng)
-        gClickedPos = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+        gClickedPos = mapsMouseEvent.latLng
         console.log(gClickedPos)
         // Create a new InfoWindow.
         let infoWindow = new google.maps.InfoWindow({
