@@ -1,11 +1,13 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { placeService } from './services/place.service.js'
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onAddPlace = onAddPlace
 
 function onInit() {
   mapService
@@ -48,7 +50,14 @@ function onGetUserPos() {
       console.log('err!!!', err)
     })
 }
+
 function onPanTo() {
   console.log('Panning the Map')
   mapService.panTo(35.6895, 139.6917)
+}
+
+function onAddPlace() {
+  const clickedPos = mapService.getGclickedPos()
+  console.log('adding place')
+  placeService.addPlace(clickedPos)
 }

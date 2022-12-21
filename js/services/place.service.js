@@ -1,10 +1,48 @@
 import { storageService } from './storage.service.js'
 import { utils } from './utils.js'
 
-export const placeService = {}
+export const placeService = {
+  addPlace,
+}
+
+// * from loc.service
+const locs = [
+  { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
+  { name: 'Neveragain', lat: 32.047201, lng: 34.832581 },
+]
+
+function getLocs() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(locs)
+    }, 2000)
+  })
+}
 
 const STORAGE_KEY_PLACE_DB = 'placeDB'
-const gSavedPlaces = loadFromStorage(STORAGE_KEY_PLACE_DB) || _createPlaces()
+const gSavedPlaces =
+  storageService.loadFromStorage(STORAGE_KEY_PLACE_DB) || _createPlaces()
+
+function addPlace({ lat, lng }) {
+  gSavedPlaces.unshift(
+    _createPlace({
+      lat,
+      lng,
+    })
+  )
+  storageService.saveToStorage(STORAGE_KEY_PLACE_DB, gSavedPlaces)
+}
+
+function _createPlace({ lat, lng }) {
+  return {
+    id: utils.makeId(),
+    lat,
+    lng,
+    name: 'New place',
+    time: new Date(),
+    updatedAt: null,
+  }
+}
 
 // * place keeper functions
 function getPlaces() {
@@ -21,46 +59,24 @@ function removePlace(placeId) {
   saveToStorage(STORAGE_KEY_PLACE_DB, gSavedPlaces)
 }
 
-function addPlace({ lat, lng, name, time }) {
-  gSavedPlaces.unshift(
-    _createPlace({
-      lat,
-      lng,
-      name,
-      time,
-    })
-  )
-  saveToStorage(STORAGE_KEY_PLACE_DB, gSavedPlaces)
-}
-
-function _createPlace({ lat, lng, name, time }) {
-  return {
-    id: makeId(),
-    lat,
-    lng,
-    name,
-    time,
-  }
-}
-
 function _createPlaces() {
   return [
     {
-      id: makeId(),
+      id: utils.makeId(),
       lat: 32,
       lng: 15,
       name: 'Home',
       time: '16/10/22, 13:01',
     },
     {
-      id: makeId(),
+      id: utils.makeId(),
       lat: 12,
       lng: 34,
       name: 'Safari',
       time: '16/10/22, 13:01',
     },
     {
-      id: makeId(),
+      id: utils.makeId(),
       lat: 65,
       lng: 67,
       name: 'School',

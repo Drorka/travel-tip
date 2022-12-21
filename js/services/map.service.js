@@ -2,10 +2,12 @@ export const mapService = {
   initMap,
   addMarker,
   panTo,
+  getGclickedPos,
 }
 
 // Var that is used throughout this Module (not global)
 var gMap
+let gClickedPos
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log('InitMap')
@@ -20,6 +22,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     })
     .then(() => {
       gMap.addListener('click', (mapsMouseEvent) => {
+        console.log(mapsMouseEvent.latLng)
+        gClickedPos = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+        console.log(gClickedPos)
         // Create a new InfoWindow.
         let infoWindow = new google.maps.InfoWindow({
           position: mapsMouseEvent.latLng,
@@ -33,7 +38,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     })
 }
 
-window.initMap = initMap
+function getGclickedPos() {
+  return gClickedPos
+}
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({
