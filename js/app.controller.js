@@ -10,6 +10,8 @@ window.onGetUserPos = onGetUserPos
 window.onAddPlace = onAddPlace
 window.onRemovePlace = onRemovePlace
 window.onGoToPlace = onGoToPlace
+window.onSearch = onSearch
+window.onSearchInput = onSearchInput
 
 function onInit() {
   mapService
@@ -92,4 +94,20 @@ function onRemovePlace(placeId) {
 function onGoToPlace(lat, lng) {
   console.log(lat, lng)
   mapService.centerMap(lat, lng)
+}
+
+function onSearch(ev) {
+  if (ev) ev.preventDefault()
+  console.log(ev)
+  const elInputSearch = document.querySelector('input[name=search]')
+  console.log(elInputSearch.value)
+  const prmAns = mapService.searchAddress(elInputSearch.value)
+  console.log(prmAns)
+
+  prmAns.then((res) => {
+    console.log(res.formatted_address)
+    var lat = res.geometry.location.lat
+    var lng = res.geometry.location.lng
+    onGoToPlace(lat, lng)
+  })
 }

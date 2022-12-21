@@ -4,6 +4,8 @@ export const mapService = {
   panTo,
   getGclickedPos,
   centerMap,
+  searchAddress,
+  searchInput,
 }
 
 // Var that is used throughout this Module (not global)
@@ -65,6 +67,17 @@ function centerMap(lat, lng) {
     map: gMap,
   })
   // map.addListener("dblclick", onAddPlace)
+}
+
+function searchAddress(address) {
+  return axios
+    .get(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDOtyCghM3CvYqD4DVheWeTECQ4Tki6m1s`
+    )
+    .then((res) => {
+      console.log(res)
+      res.data.results[0]
+    })
 }
 
 function addMarker(loc) {
